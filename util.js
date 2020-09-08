@@ -1,19 +1,25 @@
 var request = require("request");
 var {
-  keosdUrl,
+  endpoint,
+  version,
   method,
   headers
 }  = require("./config");
 
-module.exports.call = function (func, args, callback) {
-  if (typeof(args) === "function") {
-    callback = args;
-    args = null;
+module.exports.call = function (func, args, options, callback) {
+  if (typeof(options) === "function") {
+    callback = options;
+    options = {};
   }
+  if (!options || typeof(options) !== "object") {
+    options = {};
+  }
+  endpoint = options.endpoint || endpoint;
+  version = options.version || version;
 
   var options = {
     method: method.POST,
-    url: keosdUrl + func,
+    url: endpoint + version + func,
     headers: headers,
     body: JSON.stringify(args)
   };

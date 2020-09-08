@@ -1,7 +1,13 @@
+// keosd --plugin eosio::wallet_api_plugin --http-server-address 0.0.0.0:9999
 var keosd = require("./keosd");
 
+let options = {
+  // endpoint: "http://192.168.47.159:9999",
+  endpoint: "http://192.168.1.58:9999",
+  version:"/v1/wallet/"
+}
 /* create wallet */
-keosd.create("hhh", (err, result) => {
+keosd.create("hhh", options, (err, result) => {
   if (err) {
     console.log("create.error:", err);
   } else {
@@ -10,7 +16,7 @@ keosd.create("hhh", (err, result) => {
 });
 
 /* lock wallet */
-keosd.lock("wl", (err, result) => {
+keosd.lock("wl", options,(err, result) => {
   if (err) {
     console.log("lock.error:", err);
   } else {
@@ -19,16 +25,16 @@ keosd.lock("wl", (err, result) => {
 });
 
 /* lock all wallet */
-// keosd.lock_all((err, result) => {
-//   if (err) {
-//     console.log("lock_all.error:", err);
-//   } else {
-//     console.log("lock_all:", result);
-//   }
-// });
+keosd.lock_all(options,(err, result) => {
+  if (err) {
+    console.log("lock_all.error:", err);
+  } else {
+    console.log("lock_all:", result);
+  }
+});
 
 /* unlock wallet */
-keosd.unlock("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", (err, result) => {
+keosd.unlock("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", options,(err, result) => {
   if (err) {
     console.log("unlock.error:", err);
   } else {
@@ -37,7 +43,7 @@ keosd.unlock("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", (err
 });
 
 /* unlock wallet */
-keosd.unlock("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", (err, result) => {
+keosd.unlock("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", options,(err, result) => {
   if (err) {
     console.log("unlock.error:", err);
   } else {
@@ -46,52 +52,52 @@ keosd.unlock("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", (err
 });
 
 /* create key */
-// keosd.create_key("wl", "K1", (err, result) => {
-//   if (err) {
-//     console.log("create_key.error:", err);
-//   } else {
-//     console.log("create_key:", result);
-//   }
-// });
+keosd.create_key("wl", "K1", options,(err, result) => {
+  if (err) {
+    console.log("create_key.error:", err);
+  } else {
+    console.log("create_key:", result);
+  }
+});
 
 /* import private key */
-// // keosd.import_key("wl", "5HuoLRVQScajQ8q9iTZoFtYbk86umrQ96RZMhfXXsdAcL8bgtYF", (err, result) => {
-// //   if (err) {
-// //     console.log("import_key.error:", err);
-// //   } else {
-// //     console.log("import_key:", result);
-// //   }
-// // });
+keosd.import_key("wl", "5HuoLRVQScajQ8q9iTZoFtYbk86umrQ96RZMhfXXsdAcL8bgtYF", options,(err, result) => {
+  if (err) {
+    console.log("import_key.error:", err);
+  } else {
+    console.log("import_key:", result);
+  }
+});
 
 /* list wallets */
-// keosd.list_wallets((err, result) => {
-//   if (err) {
-//     console.log("list_wallets.error:", err);
-//   } else {
-//     console.log("list_wallets:", result);
-//   }
-// });
+keosd.list_wallets((err, result) => {
+  if (err) {
+    console.log("list_wallets.error:", err);
+  } else {
+    console.log("list_wallets:", result);
+  }
+});
 
 /* list keys */
-// keosd.list_keys("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", (err, result) => {
-//   if (err) {
-//     console.log("list_keys.error:", err);
-//   } else {
-//     console.log("list_keys:", result);
-//   }
-// });
+keosd.list_keys("wl", "PW5HzVg1haAHL5cBPC47TKfLUCZ8svNF27rQPmH6JFp8vQS9MBmAD", options, (err, result) => {
+  if (err) {
+    console.log("list_keys.error:", err);
+  } else {
+    console.log("list_keys:", result);
+  }
+});
 
 /* set wallet timeout seconds */
-// keosd.set_timeout(9999999999999999, (err, result) => {
-//   if (err) {
-//     console.log("set_timeout.error:", err);
-//   } else {
-//     console.log("set_timeout:", result);
-//   }
-// });
+keosd.set_timeout(9999999999999999, options,(err, result) => {
+  if (err) {
+    console.log("set_timeout.error:", err);
+  } else {
+    console.log("set_timeout:", result);
+  }
+});
 
 /* get public keys */
-keosd.get_public_keys((err, pubKeys) => {
+keosd.get_public_keys(options, (err, pubKeys) => {
   if (err) {
     console.log("get_public_keys.error:", err);
     return;
@@ -173,7 +179,7 @@ keosd.get_public_keys((err, pubKeys) => {
           })[0].required_auth.keys.map(v => v.key );
           // console.log("active permission info :", permission);
 
-          keosd.sign_transaction(tx, permission, chainId, (err, signTx) => {
+          keosd.sign_transaction(tx, permission, chainId, options, (err, signTx) => {
             if (err) {
               console.log("sign_transaction.error:", err);
               return;
